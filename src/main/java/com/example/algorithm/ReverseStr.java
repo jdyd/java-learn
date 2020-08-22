@@ -5,7 +5,8 @@ import org.junit.Test;
 /**
  * @Author: cuijian05
  * @Date: 2020/8/22
- * @Description: 【面试】将字符串abcdefgh的前五个字符和后三个字符交换位置，变为fghabcde
+ * @Description: 【面试】给定一个字符串和左侧长度leftSize，将str左侧leftSize部分和右侧部分做整体交换，要求额外空间复杂度O(1).
+ *                  将字符串abcdefgh的前五个字符和后三个字符交换位置，变为fghabcde
  */
 public class ReverseStr{
 
