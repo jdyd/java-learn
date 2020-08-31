@@ -36,7 +36,7 @@ public class Topk{
         for( int i = k; i < data.length; i++ ){
             int temp = data[ i ];
             if( temp > minHeap.getRoot() ){
-                minHeap.setHeap( temp );
+                minHeap.setRootValue( temp );
             }
         }
         return topK;
@@ -100,7 +100,12 @@ public class Topk{
             return data[ 0 ];
         }
 
-        public void setHeap( int i ){
+        /**
+         * 重新设置根节点的值，然后调整堆
+         *
+         * @param i
+         */
+        public void setRootValue( int i ){
             //将根节点设置为i
             data[ 0 ] = i;
             //重新调整堆结构

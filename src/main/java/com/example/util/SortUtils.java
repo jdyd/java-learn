@@ -3,6 +3,7 @@ package com.example.util;
 import org.apache.commons.lang.ArrayUtils;
 
 import java.util.Arrays;
+import java.util.Random;
 
 /**
  * @Auther: cuijian05
@@ -21,5 +22,21 @@ public class SortUtils{
         int temp = arr[ i ];
         arr[ i ] = arr[ j ];
         arr[ j ] = temp;
+    }
+
+    public static int[] getRandomInts( int size ){
+        int[] arr = new int[ size ];
+        for( int i = 0; i < size; i++ ){
+            arr[ i ] = new Random().nextInt( size );
+        }
+        return arr;
+    }
+
+    public static int[] getOrderedInts( int size ){
+        int[] arr = new int[ size ];
+        for( int i = 0; i < size; i++ ){
+            arr[ i ] = i;
+        }
+        return arr;
     }
 }

@@ -38,4 +38,35 @@ public class BubbleSort{
             }
         }
     }
+
+    //-----------------------优化：如果一趟排序后也没有交换位置，那么该数组已有序～-------------------------------
+
+    @Test
+    public void test1(){
+        int[] arr = SortUtils.getOrderedInts( 10000 );
+        //        int[] arr = SortUtils.getRandomInts( 10000 );
+        long start = System.currentTimeMillis();
+        bubbleSort1( arr );
+        long end = System.currentTimeMillis();
+        System.out.println( "耗时（ms）：" + ( end - start ) );
+        //        SortUtils.println( arr );
+    }
+
+    private void bubbleSort1( int[] arr ){
+        int size = arr.length;
+        for( int i = 0; i < size - 1; i++ ){
+            boolean isChange = false;
+            for( int j = 0; j < size - i - 1; j++ ){
+                if( arr[ j ] > arr[ j + 1 ] ){
+                    SortUtils.swap( arr, j, j + 1 );
+                    isChange = true;
+                }
+            }
+            //如果比较完一趟没有发生置换，那么说明已经排好序了，不需要再执行下去了
+            if( !isChange ){
+                break;
+            }
+        }
+    }
+
 }
