@@ -1,5 +1,6 @@
 package com.example.util;
 
+import org.apache.commons.lang.time.DateUtils;
 import org.junit.Test;
 
 import java.text.DateFormat;
@@ -13,12 +14,12 @@ import java.util.Date;
  * @Description: 时间工具类
  */
 public class DateUtil{
-    public static final String yyyyMMddHHmmss = "yyyy-MM-dd HH:mm:ss";
+    private static final String date_format = "yyyy-MM-dd HH:mm:ss:SSS";
 
     @Test
     public void getOneYearAfterTest(){
-        System.out.println( "当前时间：  " + dateToString( new Date(), yyyyMMddHHmmss ) );
-        System.out.println( "一年后时间： " + dateToString( getXXYearAfter( 1 ), yyyyMMddHHmmss ) );
+        System.out.println( "当前时间：  " + format( new Date() ) );
+        System.out.println( "一年后时间： " + format( getXXYearAfter( 1 ) ) );
     }
 
     /**
@@ -39,15 +40,22 @@ public class DateUtil{
         return calendar.getTime();
     }
 
-    /**
-     * 时间Date格式化
-     *
-     * @param date
-     * @param format
-     * @return
-     */
-    public static String dateToString( Date date, String format ){
-        DateFormat df = new SimpleDateFormat( format );
-        return df.format( date );
+    private static ThreadLocal< DateFormat > threadLocal2 = new ThreadLocal< DateFormat >();
+
+    public static DateFormat getDateFormat(){
+        DateFormat df = threadLocal2.get();
+        if( df == null ){
+            df = new SimpleDateFormat( date_format );
+            threadLocal2.set( df );
+        }
+        return df;
+    }
+
+    public static String format( Date date ){
+        return getDateFormat().format( date );
+    }
+
+    public static Date parse( String strDate ) throws Exception{
+        return getDateFormat().parse( strDate );
     }
 }
